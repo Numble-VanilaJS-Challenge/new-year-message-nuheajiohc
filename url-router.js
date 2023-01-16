@@ -1,59 +1,52 @@
-const urlTitle = "HPNY 2023";
+import HomeView from "./Views/home.js";
+import WritingView from "./Views/writingPage.js";
+import DetailPostView from "./Views/detailPostPage.js";
 
-document.addEventListener("click", e => {
-  const { target } = e;
-  if (!target.matches("div a")) {
-    return;
-  }
-  e.preventDefault();
-  urlRoute();
-});
-
-const urlRoutes = {
-  404: {
-    template: "/templates/404.html",
-    title: `${urlTitle} | 404`,
-    description: "Page not found",
-  },
-  "/": {
-    template: "/templates/mainPage.html",
-    title: `${urlTitle} | main`,
-    description: "This is main Page",
-  },
-  "/post-input": {
-    template: "/templates/postingPage.html",
-    title: `${urlTitle} | posting-page`,
-    description: "This is posting Page",
-  },
-  "/post-detail": {
-    template: "/templates/postViewPage.html",
-    title: `${urlTitle} | posts View Page`,
-    description: "This if postis View Page",
-  },
+const checkPressibleButton = event => {
+  const { target } = event;
+  event.preventDefault();
+  const isPressibleButton = target.matches(".pressable-button");
+  if (!isPressibleButton) return;
+  setupRouting(target);
 };
 
-const urlRoute = event => {
-  event = event || window.event;
-  event.preventDefault();
-  window.history.pushState({}, "", event.target.href);
+const setupRouting = target => {
+  history.pushState({}, null, target.href);
   urlLocationHandler();
 };
 
 const urlLocationHandler = async () => {
   const location = window.location.pathname;
-  if (location.length === 0) {
-    location = "/";
-  }
+  const route = views[location];
+  //console.log(window.location);
+  //console.log(location, "/post/:postId");
+  //console.log(location === "/post/:postId");
+  route();
+};
 
-  const route = urlRoutes[location] || urlRoutes[404];
-  const html = await fetch(route.template).then(response => response.text());
-  document.querySelector("#content").innerHTML = html;
-  document.title = route.title;
+const views = {
+  "/": async () => {
+    const homeView = new HomeView();
+    await homeView.getApi();
+    homeView.renderView();
+  },
+  "/post/:postId": async () => {
+    const detailPostView = new DetailPostView();
+    await detailPostView.getApi();
+    detailPostView.renderView();
+  },
+  "/writing-page": () => {
+    const writngView = new WritingView();
+    writngView.renderView();
+    writngView.manipulateView();
+  },
 };
 
 //뒤로가기,앞으로가기 구현
-window.onpopstate = urlLocationHandler;
-window.route = urlRoute;
+addEventListener("popstate", urlLocationHandler);
+//window.route = urlRoute;
 
-//첫 시작부터 메인페이지 띄우는 기능
+// //첫 시작부터 메인페이지 띄우는 기능
 urlLocationHandler();
+
+document.addEventListener("click", checkPressibleButton);

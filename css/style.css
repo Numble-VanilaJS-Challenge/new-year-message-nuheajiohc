@@ -1,0 +1,10 @@
+@import "./reset.css";
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+@import "./navBar.css";
+@import "./home.css";
+
+body {
+  max-width: 640px;
+  margin: 0 auto;
+  font-family: "Roboto", sans-serif;
+}
