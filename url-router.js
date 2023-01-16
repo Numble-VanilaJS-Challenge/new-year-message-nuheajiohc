@@ -21,9 +21,6 @@ const urlLocationHandler = async () => {
     location = "/detailPost";
   }
   const route = views[location];
-
-  //console.log(location, "/post/:postId");
-  //console.log(location === "/post/:postId");
   route();
 };
 
@@ -35,8 +32,9 @@ const views = {
   },
   "/detailPost": async () => {
     const detailPostView = new DetailPostView();
-    await detailPostView.getApi(window.location.pathname.split("/")[2]);
-    detailPostView.renderView();
+    await detailPostView.getPostApi(window.location.pathname.split("/")[2]);
+    detailPostView.renderPostView();
+    detailPostView.renderCommentView();
   },
   "/writing-page": () => {
     const writngView = new WritingView();
