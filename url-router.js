@@ -17,6 +17,7 @@ const setupRouting = target => {
 
 const urlLocationHandler = async () => {
   let location = window.location.pathname;
+  console.log(location);
   if (location.split("/").length === 3) {
     location = "/detailPost";
   }
