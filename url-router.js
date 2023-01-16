@@ -16,9 +16,12 @@ const setupRouting = target => {
 };
 
 const urlLocationHandler = async () => {
-  const location = window.location.pathname;
+  let location = window.location.pathname;
+  if (location.split("/").length === 3) {
+    location = "/detailPost";
+  }
   const route = views[location];
-  //console.log(window.location);
+
   //console.log(location, "/post/:postId");
   //console.log(location === "/post/:postId");
   route();
@@ -30,9 +33,9 @@ const views = {
     await homeView.getApi();
     homeView.renderView();
   },
-  "/post/:postId": async () => {
+  "/detailPost": async () => {
     const detailPostView = new DetailPostView();
-    await detailPostView.getApi();
+    await detailPostView.getApi(window.location.pathname.split("/")[2]);
     detailPostView.renderView();
   },
   "/writing-page": () => {
