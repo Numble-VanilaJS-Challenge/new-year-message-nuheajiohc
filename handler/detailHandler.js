@@ -10,7 +10,7 @@ export default async function handleDetailPage(pathname) {
 
   const editBtn = document.querySelector(".post-edit-btn");
   editBtn.addEventListener("click", async () => {
-    await fetch(`${baseUrl}${pathname.slice(1)}`, {
+    return await fetch(`${baseUrl}${pathname.slice(1)}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
