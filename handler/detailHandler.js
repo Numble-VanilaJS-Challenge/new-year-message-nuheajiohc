@@ -4,7 +4,6 @@ import handleMainPage from "./mainHandler.js";
 
 export default async function handleDetailPage(pathname) {
   const detailPage = new DetailPage();
-  console.log(pathname);
   await detailPage.getPostApi(pathname);
   detailPage.renderPostView();
   detailPage.renderCommentView();

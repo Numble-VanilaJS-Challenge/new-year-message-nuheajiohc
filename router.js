@@ -16,7 +16,6 @@ async function loadPage() {
   if (checkPostPageUrl(location)) location = "/post";
 
   const render = pageMap[location] || pageMap[404];
-  console.log(window.location.pathname);
   await render(window.location.pathname);
 }
 
@@ -27,12 +26,12 @@ const pageMap = {
   "/post": handleDetailPage,
 };
 
-function routePage(event) {
+async function routePage(event) {
   event.preventDefault();
   const renderButton = event.target.closest("a");
   if (!renderButton) return;
   window.history.pushState({}, "", renderButton.href);
-  loadPage();
+  await loadPage();
 }
 
 function a() {
