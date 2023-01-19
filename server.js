@@ -1,8 +1,9 @@
 const express = require("express");
 const app = express();
-const port = 9500;
+const port = 9400;
 
 app.use("/", express.static(__dirname));
+
 app.get("/*", (req, res) => res.sendFile(__dirname + "/index.html"));
 
 app.listen(port, () => {
