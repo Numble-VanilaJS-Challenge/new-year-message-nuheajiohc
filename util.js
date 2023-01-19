@@ -9,7 +9,7 @@ const endPoint = {
   uploadPost: "post",
 };
 
-const randomImageUrl = "http://source.unsplash.com/random";
+const randomImageUrl = "https://source.unsplash.com/random";
 
 const documentTitle = {
   main: "HPNY 2023",
