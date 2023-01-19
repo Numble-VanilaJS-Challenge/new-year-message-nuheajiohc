@@ -12,7 +12,10 @@ export default async function handleDetailPage(pathname) {
   editBtn.addEventListener("click", async () => {
     await fetch(`${baseUrl}${pathname.slice(1)}`, {
       method: "PATCH",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
       body: JSON.stringify({
         title: "제목",
         content: "내용",
