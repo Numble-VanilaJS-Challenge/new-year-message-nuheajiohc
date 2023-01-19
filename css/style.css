@@ -1,7 +1,9 @@
 @import "./reset.css";
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
-@import "./navBar.css";
-@import "./home.css";
+@import "./nav.css";
+@import "./mainPage.css";
+@import "./uploadPage.css";
+@import "./detail.css";
 
 body {
   max-width: 640px;
