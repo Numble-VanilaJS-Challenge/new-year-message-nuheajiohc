@@ -2,7 +2,7 @@ function checkPostPageUrl(location) {
   return /\/post\/[0-9]+$/.test(location);
 }
 
-const baseUrl = "http://43.201.103.199/";
+const baseUrl = "api/";
 
 const endPoint = {
   loadPosts: "posts",
